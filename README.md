@@ -18,7 +18,7 @@ See the directions below to Convert into the expected HTML format and add it to 
 --
 
 
-A big thanks to [Nick Stenning](github.com/nickstenning) for providing these scripts, resources and clear directions:
+A big thanks to [Nick Stenning](https://github.com/nickstenning) for providing these scripts, resources and clear directions:
 <h5>install python</h5>
 
 <h5>downloand the data and conversion scripts</h5>
