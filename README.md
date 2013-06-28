@@ -39,14 +39,13 @@ Follow in order:<br>
 
 
 
-![alt text][icon] 1. Add Works of Shakespeare
+<h2>![alt text][icon]1. Add Works of Shakespeare</h2>
 ===================
 See the directions below to Convert into the expected HTML format and add it to your db
 
 
 <h3>Add the Shakespeare HTML to your Mongodb database</h3>
 --
-
 
 <h5>download dependencies: </h5>
 ```
@@ -83,7 +82,7 @@ I like to copy the html file out of the material_cache/moby/html directory and i
     node importShakespeareHtml.js
 ```
 
-![alt text][icon] 2. Add Annotations into DB
+<h2>![alt text][icon] 2. Add Annotations into DB</h2>
 ===================
 
 ```
@@ -119,7 +118,7 @@ Run parseJsonArray.js in the console
 node parseJsonArray.js
 ```
 
-3. Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
+<h2>![alt text][icon]3. Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema</h2>
 ===================
 
 <h5> AnnotateIt.org data example</h5>
