@@ -204,9 +204,38 @@ We want the annotations.json data shown above to look like this so that it will 
         updated: { type: Date, default: Date.now() },
     });
 ```
+<h3>change uri and/or ranges</h3>
+--
+It is really important that you run the updateAnnotationsRangesUri.js script before you run the updateAnnotationsSchema.js script. If you do not want to update the URI or ranges, skip to the edit schema step. 
 
+<h5>edit the script to use your db</h5>
+Change the db location address to use your database by changing the first parameter of the MongoClient.connect() function
+
+```javascript
+    // Retrieve
+    var MongoClient = require('mongodb').MongoClient;
+    
+    // Connect to db, edit to match your db address
+    MongoClient.connect("mongodb://localhost:27017/open_shakespeare", function(err, db) {
+      if(!err) {
+        console.log("connected successfully to mongodb://localhost:27017/open_shakespeare");
+        //on successfully connecting, run updater function
+        updateAnnotationsRangesUri(db);
+      } else {
+        console.error("Error connecting to mongodb://localhost:27017/open_shakespeare");
+      }
+    });
+```
+
+<h5>run updateAnnotationsRangesUri.js</h5>
+in the console:
+```
+node updateAnnotationsRangesUri.js
+```
+It should print whether there were any errors, successes and when it completes
 <h3>edit schema</h3>
 --
+Ensure that if you want to edit the ranges or URI that you run the updateAnnotationsRangesUri.js script before this one.
 <h5>edit script for your db</h5>
 note that this script does not use Mongoose like the importShakespeareHtml.js script
 
@@ -225,8 +254,7 @@ note that this script does not use Mongoose like the importShakespeareHtml.js sc
     });
 ```
 
-<h3>change uri and/or ranges</h3>
---
+
 
 
 
