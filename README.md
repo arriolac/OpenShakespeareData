@@ -10,6 +10,9 @@ All the resources for converting the raw data to work cohesively with the [Annot
 * Add the old [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) from [AnnotateIt.org](annotateit.org) to your Mongodb db
 * Convert the [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) into schema expected by the annotateIt plugin
 
+
+
+
 Works of Shakespeare
 ===================
 See the directions below to Convert into the expected HTML format and add it to your db
@@ -90,7 +93,7 @@ I like to copy the html file out of the material_cache/moby/html directory and i
 ```
 
 Retrieve annotations from [AnnotateIt.org](annotateit.org)
---
+===================
 
 <h3>Save json file</h3>
 <h6> Not necessary for you to do, but I wanted to outline where and how I recieved the data. The annotations.json file is the result of theis process:</h6> 
@@ -138,7 +141,7 @@ node parseJsonArray.js
 ```
 
 Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
---
+===================
 
 <h5> AnnotateIt.org data example</h5>
 This what is the JSON data in annotations.json looks like:
