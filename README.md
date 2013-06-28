@@ -127,6 +127,8 @@ It is really important that you run the updateAnnotationsRangesUri.js script bef
 <h5>edit the script to use your db</h5>
 Change the db location address to use your database by changing the first parameter of the MongoClient.connect() function
 
+
+<h6>updateUriRanges.js</h6>
 ```javascript
     // Retrieve
     var MongoClient = require('mongodb').MongoClient;
@@ -144,36 +146,61 @@ Change the db location address to use your database by changing the first parame
 ```
 
 <h5>Edit the URI/Ranges</h5>
-The annotateIt plugin relies directly on the URI and xPath ranges to map the annotation data to the works of Shakespeare. For more information on how this works, see the wiki page: About Annotation Plugin
+The annotateIt plugin relies directly on the URI and xPath ranges to map the annotation data to the works of Shakespeare. For more information on how this works, see the wiki page: About Annotation Plugin.<br>
 
 
-
-<h5>run updateAnnotationsRangesUri.js</h5>
-in the console:
-```
-node updateAnnotationsRangesUri.js
-```
-It should print whether there were any errors, successes and when it completes
-<h3>edit schema</h3>
---
-Ensure that if you want to edit the ranges or URI that you run the updateAnnotationsRangesUri.js script before this one.
-<h5>edit script for your db</h5>
-note that this script does not use Mongoose like the importShakespeareHtml.js script
+<h6>updateUriRanges.js</h6>
 
 ```javascript
-    // Retrieve
-    var MongoClient = require('mongodb').MongoClient;
-    
-    // Connect to the db
-    MongoClient.connect("mongodb://localhost:27017/open_shakespeare", function(err, db) {
-      if(!err) {
-        console.log("connected successfully to mongodb://localhost:27017/open_shakespeare");
-        updateAnnotations(db);
-      } else {
-        console.error("Error connecting to mongodb://localhost:27017/open_shakespeare");
-      }
-    });
+  annotations.find().toArray(function(err, results) {
+    if(!err) {
+      results.forEach(function(annotation){
+        if(annotation.ranges) {
+
+          //extract title from URI to make a relative pathname that matches with the Annotorious router
+          var titleStart = (annotation._source.uri).search('/work') + 6,
+          title = (annotation._source.uri).slice(titleStart),
+          uri = '/#works/' + title;
+
+          //edit here to create a filepath relative to your DOM structure
+          var start = '/div[2]/div[1]/div[2]/div[2]' + annotation.ranges[0].start;
+          var end = '/div[2]/div[1]/div[2]/div[2]' + annotation.ranges[0].end;
+          annotations.update(
+            //update the changes in the db.
+            {'_id': annotation._id},
+            {
+              $set: {
+                'uri': uri,
+                'ranges.0.start': start,
+                'ranges.0.end': end
+              }
+            }, 
+            {safe: true}, 
+            function(err, result){
+              if(!err) {
+                console.log('Success!');
+              } else {
+                console.log('Error updating annotation ranges for %s', annotation._id);
+              }
+            }
+          );
+        };
+      });
+    console.log("Complete!");
+    } else {
+      console.error("Error querying annotations collection:", err );
+    }
+  });
 ```
+
+<h5>run updateRangesUri.js</h5>
+in the console:
+```
+node updateRangesUri.js
+```
+It should print whether there were any errors, successes and when it completes
+
+
 
 
 
