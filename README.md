@@ -24,6 +24,7 @@ A big thanks to Nick Stenning for providing these scripts, resources and clear d
 <h5>downloand the data and conversion scripts</h5>
     
     git clone https://github.com/okfn/shakespeare
+    //!!Don't forget to cd into shakespeare  
     cd shakespeare
     hg clone https://bitbucket.org/okfn/shksprdata
     
