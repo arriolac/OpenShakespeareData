@@ -32,10 +32,10 @@ Convert the [Finals Club annotation data](http://annotateit.org/api/search_raw?q
 ===================
 The quick and dirty way to get your database set up correctly<br>
 
-Follow in order:
-1. Add Works
-2. Add Annotations
-3. Convert Annotations
+Follow in order:<br>
+1. Add Works<br>
+2. Add Annotations<br>
+3. Convert Annotations<br>
 
 
 
