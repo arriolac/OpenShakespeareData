@@ -98,6 +98,8 @@ This must be done before any of the annotation reformatting scripts can run.
 <h5> edit DB location in parseJsonArray.js </h5>
 Change the db location address to use your database by changing the first parameter of the MongoClient.connect() function
 
+<h6>parseJsonArray.js</h6>
+
 ```javascript
     // Retrieve
     var MongoClient = require('mongodb').MongoClient;
@@ -208,13 +210,13 @@ It prints whether there were any errors, successes and when it completes
 If you intend to edit the ranges or URI for this data, you must complete step 3 before step 4.
 
 <h5>edit script for your db</h5>
-
+Change the db location address to use your database by changing the first parameter of the MongoClient.connect() function
 <h6>updateAnnotationsSchema.js</h6>
 ```javascript
     // Retrieve
     var MongoClient = require('mongodb').MongoClient;
     
-    // Connect to the db
+    // Connect to the db edit this string to connect to your db: mongodb://localhost:27017/open_shakespeare
     MongoClient.connect("mongodb://localhost:27017/open_shakespeare", function(err, db) {
       if(!err) {
         console.log("connected successfully to mongodb://localhost:27017/open_shakespeare");
