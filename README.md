@@ -124,6 +124,24 @@ Since the data is very large, MongoDb will return an error unless you use --json
 
 <h3> Parse MongoDb Array </h3>
 --
+<h5> edit DB location in parseJsonArray.js </h5>
+Change the db location address to use your database by changing the first parameter of the MongoClient.connect() function
+
+```javascript
+    // Retrieve
+    var MongoClient = require('mongodb').MongoClient;
+    
+    // Connect to db, edit to match your db address
+    MongoClient.connect("mongodb://localhost:27017/open_shakespeare", function(err, db) {
+      if(!err) {
+        console.log("connected successfully to mongodb://localhost:27017/open_shakespeare");
+        //on successfully connecting, run updater function
+        parseAnnotations(db);
+      } else {
+        console.error("Error connecting to mongodb://localhost:27017/open_shakespeare");
+      }
+    });
+```
 Run parseJsonArray.js in the console
 ```
 node parseJsonArray.js
