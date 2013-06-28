@@ -18,7 +18,7 @@ See the directions below to Convert into the expected HTML format and add it to 
 --
 
 
-A big thanks to Nick Stenning for providing these scripts, resources and clear directions:
+A big thanks to [Nick Stenning](github.com/nickstenning) for providing these scripts, resources and clear directions:
 <h5>install python</h5>
 
 <h5>downloand the data and conversion scripts</h5>
@@ -52,6 +52,7 @@ It is possible to convert this data into other formats such as JSON and render i
 <h3>Add the Shakespeare HTML to your Mongodb database</h3>
 --
 
+
 <h5>dependencies: </h5>
 * [Node](http://nodejs.org/)
 * [Mongodb node driver](https://npmjs.org/package/mongodb) <br>
@@ -60,12 +61,12 @@ npm install mongodb
 ```
 * [Mongoose](https://npmjs.org/package/mongoose) <br>
 ```
-    npm install mongoose
+npm install mongoose
 ```
-<h5>edit the script to connect to your database</h5>
+<h5>edit the importShakespeareHtml.js script to connect to your database</h5>
 <h6>filename</h6>
 
-    ```javascript
+```javascript
     var mongoose = require('mongoose');
     var fs = require('fs');
     
@@ -81,7 +82,15 @@ npm install mongodb
     });
     
     var Play = mongoose.model('Play', PlaySchema);
+```
+<h5> put the importShakespeareHtml.js script in the right directory</h5>
+The script will look for any .html files in a folder named html in the same directory.<br>
+I like to copy the html file out of the material_cache/moby/html directory and into a separate folder with the script for organization purposes. 
+<h5> run importShakespeareHtml.js</h5>
     ```
+    node importShakespeareHtml.js
+    ```
+
 Retrieve annotations from [AnnotateIt.org](annotateit.org)
 --
 
