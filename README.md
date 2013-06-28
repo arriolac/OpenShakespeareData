@@ -112,10 +112,22 @@ Download all the data returned by the Annotatit.org API query for all previously
 curl -o annotations.json http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0
 ```
 
+
+<h3>Add annotations into db</h3>
 --
 
-<h3>Run script to add it into db</h3>
+```
+    mongoimport --db dbname --collection annotations --file annotations.json --jsonArray
+```
+
+Since the data is very large, MongoDb will return an error unless you use --jsonArray. This puts all the JSON data into one big object that will need to be parsed out into individual db entries.
+
+<h3> Parse MongoDb Array </h3>
 --
+Run parseJsonArray.js in the console
+```
+node parseJsonArray.js
+```
 
 Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
 --
