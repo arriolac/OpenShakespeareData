@@ -1,20 +1,20 @@
 OpenShakespeareData
 ===================
 
-Scripts on converting Moby's XML formatted Shakespeare works and Finals Club's annotations data to work with the [AnnotateIt Plugin](http://annotateit.org/) using Mongodb/Mongoose datastore.
+Scripts on converting Moby's XML formatted Shakespeare works and [Finals Club](http://finalsclub.org)'s annotations data stored on AnnotateIt.org to work with the new version of the [AnnotateIt Plugin](http://annotateit.org/) using Mongodb/Mongoose datastore.
 
 Overview
 ===================
 All the resources for converting the raw data to work cohesively with the [AnnotateIt Plugin](http://annotateit.org/).
 * Convert the works of shakespeare into the expected format and add it to your Mongodb db
 * Add annotations data to your Mongodb db
-* Convert annotations data into schema expected by the annotateIt plugin
+* Convert the [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=200&from=200) into schema expected by the annotateIt plugin
 
 Works of Shakespeare
 ===================
 See the directions below to Convert into the expected HTML format and add it to your db
 
-<h3>Convert Works of Shakespeare from XML to HTML<h3>
+<h3>Convert Works of Shakespeare from XML to HTML</h3>
 --
 
 
@@ -43,6 +43,10 @@ A big thanks to Nick Stenning for providing these scripts, resources and clear d
     
 
 The output HTML files will go into the material_cache/moby/html directory.
+
+<h4> Side Note: Other Formats </h4>
+It is possible to convert this data into other formats such as JSON and render it into the corresponding html format on the client side. I would reccomend this if you want more power over your data.
+<h5> samples </h5>
 
 <h3>Add the Shakespeare HTML to your Mongodb database</h3>
 --
