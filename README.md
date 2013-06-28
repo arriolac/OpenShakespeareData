@@ -1,52 +1,64 @@
 OpenShakespeareData
 ===================
 
-Scripts on converting Moby's XML formatted Shakespeare works and Finals Club's annotations data to work with the AnnotateIt plugin using Mongodb/Mongoose datastore.
+Scripts on converting Moby's XML formatted Shakespeare works and Finals Club's annotations data to work with the [AnnotateIt Plugin](http://annotateit.org/) using Mongodb/Mongoose datastore.
 
 Overview
 ===================
-All the resources for converting the raw data to work cohesively with the http://annotateit.org/ plugin.
+All the resources for converting the raw data to work cohesively with the [AnnotateIt Plugin](http://annotateit.org/).
+* Convert the works of shakespeare into the expected format and add it to your Mongodb db
+* Add annotations data to your Mongodb db
+* Convert annotations data into schema expected by the annotateIt plugin
 
-
-Convert Works of Shakespeare from XML to HTML
+Works of Shakespeare
 ===================
+See the directions below to Convert into the expected HTML format and add it to your db
+
+<h3>Convert Works of Shakespeare from XML to HTML<h3>
+--
+
+
 A big thanks to Nick Stenning for providing these scripts, resources and clear directions:
-<h3>Install Dependencies</h3>
-* Python
-* pip
-    ```bash
-    // Clone the needed repositories
+<h5>install python</h5>
+
+<h5>downloand the data and conversion scripts</h5>
+    
     git clone https://github.com/okfn/shakespeare
     cd shakespeare
     hg clone https://bitbucket.org/okfn/shksprdata
-
-    // Install all the dependencies
+    
+<h5> Install all the dependencies </h5>
+    
     pip install -e . -e shksprdata
+    
 
-    // Configure the "shakespeare" app
+<h5> Configure the "shakespeare" app</h5>
+    
     paster make-config shakespeare development.ini
     
-    // Convert the Moby XML to HTML
+    
+<h5>Convert the Moby XML to HTML</h5>
+    
     paster --plugin=shksprdata moby html shksprdata/shksprdata/moby
-    ```
+    
 
 The output HTML files will go into the material_cache/moby/html directory.
 
-Add the Shakespeare HTML to your Mongodb database
-===================
+<h3>Add the Shakespeare HTML to your Mongodb database</h3>
+--
 
-<h3>dependencies: </h3>
-* Node: http://nodejs.org/<br>
-* Mongodb node driver: https://npmjs.org/package/mongodb<br>
-```bash    
+<h5>dependencies: </h5>
+* [Node](http://nodejs.org/)
+* [Mongodb node driver](https://npmjs.org/package/mongodb) <br>
+```
 npm install mongodb
 ```
-* Mongoose: https://npmjs.org/package/mongoose<br>
-```bash
+* [Mongoose](https://npmjs.org/package/mongoose) <br>
+```
     npm install mongoose
 ```
-<h3>edit the script to connect to your database</h3>
-<h5>filename</h5>
+<h5>edit the script to connect to your database</h5>
+<h6>filename</h6>
 
     ```javascript
     var mongoose = require('mongoose');
@@ -65,7 +77,8 @@ npm install mongodb
     
     var Play = mongoose.model('Play', PlaySchema);
     ```
-<h3></h3>
+Retrieve annotations
+===================
 
 
 
