@@ -118,7 +118,7 @@ Run parseJsonArray.js in the console
 node parseJsonArray.js
 ```
 
-![alt text][icon]3. Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
+![alt text][icon]3. Edit URI and annotation Ranges for annotation dataset
 --
 
 <h3>Change the dataset's URI and/or the annotation Ranges</h3>
