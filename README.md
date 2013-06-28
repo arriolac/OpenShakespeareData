@@ -121,8 +121,7 @@ node parseJsonArray.js
 ![alt text][icon]3. Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
 --
 
-<h3>change uri and/or ranges</h3>
---
+<h3>Change the dataset's URI and/or the annotation Ranges</h3>
 It is really important that you run the updateAnnotationsRangesUri.js script before you run the updateAnnotationsSchema.js script. If you do not want to update the URI or ranges, skip to the edit schema step. 
 
 <h5>edit the script to use your db</h5>
@@ -143,6 +142,11 @@ Change the db location address to use your database by changing the first parame
       }
     });
 ```
+
+<h5>Edit the URI/Ranges</h5>
+The annotateIt plugin relies directly on the URI and xPath ranges to map the annotation data to the works of Shakespeare. For more information on how this works, see the wiki page: About Annotation Plugin
+
+
 
 <h5>run updateAnnotationsRangesUri.js</h5>
 in the console:
