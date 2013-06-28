@@ -13,8 +13,8 @@ All the resources for converting the raw data to work cohesively with the [Annot
 <h5>Quick Guide/ReadMe</h5>
 
 <h4> See Wiki pages for an in-depth exploration on these topics:</h4>
-<h5>About the Annotator Plugin</h5>
-<h5>About the Data Sets</h5>
+About the Annotator Plugin
+About the Data Sets
 
 <h4> To recreate my process, see these Wiki pages in the following order: </h4>
 1. Convert Works<br>
