@@ -1,65 +1,57 @@
 ![alt text](https://raw.github.com/bgando/OpenShakespeareData/master/penLight.jpeg "Logo")
 ===================
 
-Scripts on converting Moby's XML formatted Shakespeare works and [Finals Club](http://finalsclub.org)'s annotations data stored on [AnnotateIt.org](annotateit.org) to work with the new version of the [AnnotateIt Plugin](http://annotateit.org/) using Mongodb/Mongoose datastore.
+[icon]: https://raw.github.com/bgando/OpenShakespeareData/master/penIcon.png
 
-Overview
+This is a repository of scripts that convert Moby's XML formatted Shakespeare works and [Finals Club](http://finalsclub.org)'s annotations data stored on [AnnotateIt.org](annotateit.org) to work with version 1.2.6 of the [AnnotateIt Plugin](http://annotateit.org/) and use Mongodb/Mongoose to store the data.<br>
+
+It can be easily customized and used to migrate this data to another URL or site with a different DOM structure using the Annotator Plugin or even the xpath jQuery library to write your own custom mapping script. 
+
+![alt text][icon]Overview
 ===================
-All the resources for converting the raw data to work cohesively with the [AnnotateIt Plugin](http://annotateit.org/).
-* Convert the works of shakespeare into the expected format and add it to your Mongodb db
-* Add the old [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) from [AnnotateIt.org](annotateit.org) to your Mongodb db
-* Convert the [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) into schema expected by the annotateIt plugin
+All the resources for converting the raw data to work cohesively with the [AnnotateIt Plugin](http://annotateit.org/).<br>
+<h5>Quick Guide/ReadMe</h5>
+
+<h4> See Wiki pages for an in-depth exploration on these topics:</h4>
+<h5>About the Annotator Plugin</h5>
+<h5>About the Data Sets</h5>
+
+<h4> To recreate my process, see these Wiki pages in the following order: </h4>
+1. Convert Works<br>
+Convert the works of Shakespeare into the expected format<br>
+2. Add Works<br>
+Add works of Shakespeare into your MongoDb <br>
+3. Retrieve Annotations<br>
+Retrieve old  [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) from [AnnotateIt.org](annotateit.org) <br>
+4. Add Annotations <br>
+Add the old [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) from [AnnotateIt.org](annotateit.org) to your MongoDb<br>
+5. Convert Annotation Schema <br>
+Convert the [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) into schema expected by the annotateIt plugin
+
+![alt text][icon]Quick Guide/ReadMe
+===================
+The quick and dirty way to get your database set up correctly<br>
+
+Follow in order:
+1. Add Works
+2. Add Annotations
+3. Convert Annotations
 
 
 
-
-Works of Shakespeare
+![alt text][icon] 1. Add Works of Shakespeare
 ===================
 See the directions below to Convert into the expected HTML format and add it to your db
 
-<h3>Convert Works of Shakespeare from XML to HTML</h3>
---
-
-
-A big thanks to [Nick Stenning](https://github.com/nickstenning) for providing these scripts, resources and clear directions:
-<h5>install python</h5>
-
-<h5>downloand the data and conversion scripts</h5>
-
-```    
-    git clone https://github.com/okfn/shakespeare
-    //!!Don't forget to cd into shakespeare  
-    cd shakespeare
-    hg clone https://bitbucket.org/okfn/shksprdata
-```    
-<h5> Install all the dependencies </h5>
-
-```    
-    pip install -e . -e shksprdata
-```
-<h5> Configure the "shakespeare" app</h5>
-
-```
-    paster make-config shakespeare development.ini
-``` 
-    
-<h5>Convert the Moby XML to HTML</h5>
-
-```
-    paster --plugin=shksprdata moby html shksprdata/shksprdata/moby
-``` 
-
-The output HTML files will go into the material_cache/moby/html directory.
-
-<h4> Side Note: Other Formats </h4>
-It is possible to convert this data into other formats such as JSON and render it into the corresponding html format on the client side. I would reccomend this if you want more power over your data.
-<h5> samples </h5>
 
 <h3>Add the Shakespeare HTML to your Mongodb database</h3>
 --
 
 
-<h5>dependencies: </h5>
+<h5>download dependencies: </h5>
+```
+    npm install
+```
 
 <h5>edit the importShakespeareHtml.js script to connect to your database</h5>
 
@@ -73,7 +65,6 @@ It is possible to convert this data into other formats such as JSON and render i
     mongoose.connect('mongodb://localhost/open_shakespeare');
     
     //the script expects this schema
-    //this is flexible but will have to match throughout your application
     var PlaySchema = new mongoose.Schema({
       title: String,
       uriTitle: String,
@@ -92,20 +83,8 @@ I like to copy the html file out of the material_cache/moby/html directory and i
     node importShakespeareHtml.js
 ```
 
-Retrieve annotations from [AnnotateIt.org](annotateit.org)
+![alt text][icon] 2. Add Annotations into DB
 ===================
-
-<h3>Save json file</h3>
-<h6> Not necessary for you to do, but I wanted to outline where and how I recieved the data. The annotations.json file is the result of theis process:</h6> 
-Download all the data returned by the Annotatit.org API query for all previously stored annotations by FinalsClub.org and saves it into a file called annotations.json
-
-```
-curl -o annotations.json http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0
-```
-
-
-<h3>Add annotations into db</h3>
---
 
 ```
     mongoimport --db dbname --collection annotations --file annotations.json --jsonArray
@@ -140,7 +119,7 @@ Run parseJsonArray.js in the console
 node parseJsonArray.js
 ```
 
-Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
+3. Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
 ===================
 
 <h5> AnnotateIt.org data example</h5>
