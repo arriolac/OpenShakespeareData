@@ -198,7 +198,32 @@ in the console:
 ```
 node updateRangesUri.js
 ```
-It should print whether there were any errors, successes and when it completes
+It prints whether there were any errors, successes and when it completes
+
+
+
+
+![alt text][icon]4. Edit Annotation Data Schema
+--
+If you intend to edit the ranges or URI for this data, you must complete step 3 before step 4.
+
+<h5>edit script for your db</h5>
+
+<h6>updateAnnotationsSchema.js</h6>
+```javascript
+    // Retrieve
+    var MongoClient = require('mongodb').MongoClient;
+    
+    // Connect to the db
+    MongoClient.connect("mongodb://localhost:27017/open_shakespeare", function(err, db) {
+      if(!err) {
+        console.log("connected successfully to mongodb://localhost:27017/open_shakespeare");
+        updateAnnotations(db);
+      } else {
+        console.error("Error connecting to mongodb://localhost:27017/open_shakespeare");
+      }
+    });
+```
 
 
 
