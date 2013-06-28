@@ -1,4 +1,4 @@
-![alt text](https://raw.github.com/bgando/OpenShakespeareData/master/penLight.jpeg "Logo")OpenShakespeareData
+![alt text](https://raw.github.com/bgando/OpenShakespeareData/master/penLight.jpeg "Logo")
 ===================
 
 Scripts on converting Moby's XML formatted Shakespeare works and [Finals Club](http://finalsclub.org)'s annotations data stored on [AnnotateIt.org](annotateit.org) to work with the new version of the [AnnotateIt Plugin](http://annotateit.org/) using Mongodb/Mongoose datastore.
