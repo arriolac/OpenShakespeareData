@@ -7,8 +7,8 @@ Overview
 ===================
 All the resources for converting the raw data to work cohesively with the [AnnotateIt Plugin](http://annotateit.org/).
 * Convert the works of shakespeare into the expected format and add it to your Mongodb db
-* Add the old [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=200&from=200) from [AnnotateIt.org](annotateit.org) to your Mongodb db
-* Convert the [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=200&from=200) into schema expected by the annotateIt plugin
+* Add the old [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) from [AnnotateIt.org](annotateit.org) to your Mongodb db
+* Convert the [Finals Club annotation data](http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0) into schema expected by the annotateIt plugin
 
 Works of Shakespeare
 ===================
@@ -22,26 +22,29 @@ A big thanks to [Nick Stenning](https://github.com/nickstenning) for providing t
 <h5>install python</h5>
 
 <h5>downloand the data and conversion scripts</h5>
-    
+
+```    
     git clone https://github.com/okfn/shakespeare
     //!!Don't forget to cd into shakespeare  
     cd shakespeare
     hg clone https://bitbucket.org/okfn/shksprdata
-    
+```    
 <h5> Install all the dependencies </h5>
-    
-    pip install -e . -e shksprdata
-    
 
+```    
+    pip install -e . -e shksprdata
+```
 <h5> Configure the "shakespeare" app</h5>
-    
+
+```
     paster make-config shakespeare development.ini
-    
+``` 
     
 <h5>Convert the Moby XML to HTML</h5>
-    
+
+```
     paster --plugin=shksprdata moby html shksprdata/shksprdata/moby
-    
+``` 
 
 The output HTML files will go into the material_cache/moby/html directory.
 
@@ -56,15 +59,20 @@ It is possible to convert this data into other formats such as JSON and render i
 <h5>dependencies: </h5>
 * [Node](http://nodejs.org/)
 * [Mongodb node driver](https://npmjs.org/package/mongodb) <br>
+
 ```
-npm install mongodb
+    npm install mongodb
 ```
+
 * [Mongoose](https://npmjs.org/package/mongoose) <br>
+
 ```
 npm install mongoose
 ```
+
 <h5>edit the importShakespeareHtml.js script to connect to your database</h5>
-<h6>filename</h6>
+
+<h6>importShakespeareHtml.js</h6>
 
 ```javascript
     var mongoose = require('mongoose');
@@ -83,13 +91,15 @@ npm install mongoose
     
     var Play = mongoose.model('Play', PlaySchema);
 ```
+
 <h5> put the importShakespeareHtml.js script in the right directory</h5>
 The script will look for any .html files in a folder named html in the same directory.<br>
 I like to copy the html file out of the material_cache/moby/html directory and into a separate folder with the script for organization purposes. 
 <h5> run importShakespeareHtml.js</h5>
-    ```
+
+```
     node importShakespeareHtml.js
-    ```
+```
 
 Retrieve annotations from [AnnotateIt.org](annotateit.org)
 --
@@ -97,6 +107,7 @@ Retrieve annotations from [AnnotateIt.org](annotateit.org)
 <h3>Save json file</h3>
 <h6> Not necessary for you to do, but I wanted to outline where and how I recieved the data. The annotations.json file is the result of theis process:</h6> 
 Download all the data returned by the Annotatit.org API query for all previously stored annotations by FinalsClub.org and saves it into a file called annotations.json
+
 ```
 curl -o annotations.json http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0
 ```
@@ -111,6 +122,7 @@ Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expecte
 
 <h5> AnnotateIt.org data example</h5>
 This what is the JSON data in annotations.json looks like:
+
 ```javascript
 "timed_out": false, 
   "took": 20, 
@@ -158,40 +170,61 @@ This what is the JSON data in annotations.json looks like:
         "_type": "annotation"
       }, //more annotations ...
 ```
+
 <h5>expected schema</h5>
 We want the annotations.json data shown above to look like this so that it will work with the plugin:
-```javascript
-// Annotation Ranges
-var Ranges = new Schema({
-    start: { type: String, required: true },
-    startOffset: { type: Number, required: false },
-    end: { type: String, required: true},
-    endOffset: { type: Number, required: false },
-    _id: { type: String, required: false }, 
-});
 
-// Annotation Model
-var Annotation = new Schema({
-    id: { type: String, required: false },
-    user: { type: String, required: false },
-    username: { type: String, required: false },
-    text: { type: String, required: true },
-    uri: { type: String, required: true },        
-    quote: { type: String, required: true }, 
-    _id: { type: String, required: false },
-    permissions: {
-      read: [String],
-      admin: [String],
-      update: [String],
-      delete: [String]
-    },   
-    ranges: [Ranges],
-    created: { type: Date, default: Date.now() },
-    updated: { type: Date, default: Date.now() },
-});
+```javascript
+    // Annotation Ranges
+    var Ranges = new Schema({
+        start: { type: String, required: true },
+        startOffset: { type: Number, required: false },
+        end: { type: String, required: true},
+        endOffset: { type: Number, required: false },
+        _id: { type: String, required: false }, 
+    });
+    
+    // Annotation Model
+    var Annotation = new Schema({
+        id: { type: String, required: false },
+        user: { type: String, required: false },
+        username: { type: String, required: false },
+        text: { type: String, required: true },
+        uri: { type: String, required: true },        
+        quote: { type: String, required: true }, 
+        _id: { type: String, required: false },
+        permissions: {
+          read: [String],
+          admin: [String],
+          update: [String],
+          delete: [String]
+        },   
+        ranges: [Ranges],
+        created: { type: Date, default: Date.now() },
+        updated: { type: Date, default: Date.now() },
+    });
 ```
+
 <h3>edit schema</h3>
 --
+<h5>edit script for your db</h5>
+note that this script does not use Mongoose like the importShakespeareHtml.js script
+
+```javascript
+    // Retrieve
+    var MongoClient = require('mongodb').MongoClient;
+    
+    // Connect to the db
+    MongoClient.connect("mongodb://localhost:27017/open_shakespeare", function(err, db) {
+      if(!err) {
+        console.log("connected successfully to mongodb://localhost:27017/open_shakespeare");
+        updateAnnotations(db);
+      } else {
+        console.error("Error connecting to mongodb://localhost:27017/open_shakespeare");
+      }
+    });
+```
+
 <h3>change uri and/or ranges</h3>
 --
 
