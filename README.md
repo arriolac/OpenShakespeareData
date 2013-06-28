@@ -192,6 +192,23 @@ var Annotation = new Schema({
 ```
 <h3>edit schema</h3>
 --
+<h5>edit script for your db</h5>
+note that this script does not use Mongoose like the importShakespeareHtml.js script
+```javascript
+    // Retrieve
+    var MongoClient = require('mongodb').MongoClient;
+    
+    // Connect to the db
+    MongoClient.connect("mongodb://localhost:27017/open_shakespeare", function(err, db) {
+      if(!err) {
+        console.log("connected successfully to mongodb://localhost:27017/open_shakespeare");
+        updateAnnotations(db);
+      } else {
+        console.error("Error connecting to mongodb://localhost:27017/open_shakespeare");
+      }
+    });
+```
+
 <h3>change uri and/or ranges</h3>
 --
 
