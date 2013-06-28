@@ -101,7 +101,7 @@ Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expecte
 --
 
 <h5> AnnotateIt.org data example</h5>
-This is the JSON data that we took off [AnnotateIt.org](annotateit.org) and stored in our db 
+This what is the JSON data in annotations.json looks like:
 ```javascript
 "timed_out": false, 
   "took": 20, 
@@ -150,7 +150,7 @@ This is the JSON data that we took off [AnnotateIt.org](annotateit.org) and stor
       }, //more annotations ...
 ```
 <h5>expected schema</h5>
-We want the data shown above to look like this:
+We want the annotations.json data shown above to look like this so that it will work with the plugin:
 ```javascript
 // Annotation Ranges
 var Ranges = new Schema({
@@ -166,9 +166,9 @@ var Annotation = new Schema({
     id: { type: String, required: false },
     user: { type: String, required: false },
     username: { type: String, required: false },
-    text: { type: String, required: false },
-    uri: { type: String, required: false },        
-    quote: { type: String, required: false }, 
+    text: { type: String, required: true },
+    uri: { type: String, required: true },        
+    quote: { type: String, required: true }, 
     _id: { type: String, required: false },
     permissions: {
       read: [String],
