@@ -82,8 +82,104 @@ npm install mongodb
     
     var Play = mongoose.model('Play', PlaySchema);
     ```
-Retrieve annotations
-===================
+Retrieve annotations from [AnnotateIt.org](annotateit.org)
+--
+
+<h3>Save json file</h3>
+--
+
+<h3>Run script to add it into db</h3>
+--
+
+Convert old [AnnotateIt.org](annotateit.org) data to AnnotateIt plugin's expected schema
+--
+
+<h5> AnnotateIt.org data example</h5>
+This is the JSON data that we took off [AnnotateIt.org](annotateit.org) and stored in our db 
+```javascript
+"timed_out": false, 
+  "took": 20, 
+  "_shards": {
+    "total": 1, 
+    "successful": 1, 
+    "failed": 0
+  }, 
+  "hits": {
+    "max_score": 1.0, 
+    "total": 3097, 
+    "hits": 
+    [ //all the annotation data we need is located in this 'hit' array
+        {
+        "_index": "ygtnjguco3fkhapb469t", 
+        "_id": "w7QFZWoOTTynOMIHLafaQQ", 
+        "_score": 1.0, 
+        "_source": { //the most important information is found here inside the '_source' object
+          "uri": "http://openshakespeare.org/work/romeo_and_juliet", 
+          "created": "2007-09-18T08:35:43", 
+          "finalsclub_id": 215, 
+          "ranges": [
+            {
+              "start": "/p[25]", 
+              "end": "/p[25]", 
+              "endOffset": 84, 
+              "startOffset": 0
+            }
+          ], 
+          "quote": "Enter ROMEO, MERCUTIO, BENVOLIO, with five or six Maskers, Torch-bearers, and others", 
+          "permissions": {
+            "read": [
+              "group:__world__"
+            ]
+          }, 
+          "consumer": "39fc339cf058bd22176771b3e32b7448", 
+          "text": "The dialogue among Romeo and his friends twists and turns and presents some\ndifficulty in being understood.\u00a0 Don\u2019t be frustrated with their language;\ntheir parents probably would have been, too, and we shouldn\u2019t expect to\nunderstand everything they say.\u00a0 The scene is of chief importance for\nintroducing Mercutio, a pivotal character in the play\u2019s plot and supposedly\none of Romeo\u2019s close friends.\u00a0 Read his speech, especially the famous\ndiscussion of Queen Mab, carefully, noting the type of language he employs.\nHow does his language strike you when compared to Romeo\u2019s?\u00a0 Benvolio\u2019s?\n\n", 
+          "user": {
+            "id": 8, 
+            "realname": "", 
+            "name": ""
+          }, 
+          "updated": "2012-06-29T12:14:56.421124+00:00"
+        }, 
+        "_type": "annotation"
+      }, //more annotations ...
+```
+<h5>expected schema</h5>
+We want the data shown above to look like this:
+```javascript
+// Annotation Ranges
+var Ranges = new Schema({
+    start: { type: String, required: true },
+    startOffset: { type: Number, required: false },
+    end: { type: String, required: true},
+    endOffset: { type: Number, required: false },
+    _id: { type: String, required: false }, 
+});
+
+// Annotation Model
+var Annotation = new Schema({
+    id: { type: String, required: false },
+    user: { type: String, required: false },
+    username: { type: String, required: false },
+    text: { type: String, required: false },
+    uri: { type: String, required: false },        
+    quote: { type: String, required: false }, 
+    _id: { type: String, required: false },
+    permissions: {
+      read: [String],
+      admin: [String],
+      update: [String],
+      delete: [String]
+    },   
+    ranges: [Ranges],
+    created: { type: Date, default: Date.now() },
+    updated: { type: Date, default: Date.now() },
+});
+```
+<h3>edit schema</h3>
+--
+<h3>change uri and/or ranges</h3>
+--
+
 
 
 
