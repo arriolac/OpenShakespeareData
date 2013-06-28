@@ -57,18 +57,6 @@ It is possible to convert this data into other formats such as JSON and render i
 
 
 <h5>dependencies: </h5>
-* [Node](http://nodejs.org/)
-* [Mongodb node driver](https://npmjs.org/package/mongodb) <br>
-
-```
-    npm install mongodb
-```
-
-* [Mongoose](https://npmjs.org/package/mongoose) <br>
-
-```
-npm install mongoose
-```
 
 <h5>edit the importShakespeareHtml.js script to connect to your database</h5>
 
@@ -124,6 +112,8 @@ Since the data is very large, MongoDb will return an error unless you use --json
 
 <h3> Parse MongoDb Array </h3>
 --
+This must be done before any of the annotation reformatting scripts can run.
+
 <h5> edit DB location in parseJsonArray.js </h5>
 Change the db location address to use your database by changing the first parameter of the MongoClient.connect() function
 
