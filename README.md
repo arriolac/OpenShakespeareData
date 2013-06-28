@@ -1,4 +1,4 @@
-OpenShakespeareData
+![alt text](https://github.com/bgando/ "Annotorious")OpenShakespeareData
 ===================
 
 Scripts on converting Moby's XML formatted Shakespeare works and [Finals Club](http://finalsclub.org)'s annotations data stored on [AnnotateIt.org](annotateit.org) to work with the new version of the [AnnotateIt Plugin](http://annotateit.org/) using Mongodb/Mongoose datastore.
