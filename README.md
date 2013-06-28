@@ -86,6 +86,12 @@ Retrieve annotations from [AnnotateIt.org](annotateit.org)
 --
 
 <h3>Save json file</h3>
+<h6> Not necessary for you to do, but I wanted to outline where and how I recieved the data. The annotations.json file is the result of theis process:</h6> 
+Download all the data returned by the Annotatit.org API query for all previously stored annotations by FinalsClub.org and saves it into a file called annotations.json
+```
+curl -o annotations.json http://annotateit.org/api/search_raw?q=_exists_:finalsclub_id&size=3100&from=0
+```
+
 --
 
 <h3>Run script to add it into db</h3>
