@@ -1,3 +1,6 @@
+OpenShakespeareData
+===================
+
 ![alt text](https://raw.github.com/bgando/OpenShakespeareData/master/penLight.jpeg "Logo")
 ===================
 
