@@ -35,7 +35,8 @@ The quick and dirty way to get your database set up correctly<br>
 Follow in order:<br>
 1. Add Works<br>
 2. Add Annotations<br>
-3. Convert Annotations<br>
+3. Edit Annotations URI/Ranges<br>
+4. Convert Annotation Schema<br>
 
 
 
