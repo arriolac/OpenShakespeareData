@@ -3,7 +3,7 @@
 
 [icon]: https://raw.github.com/bgando/OpenShakespeareData/master/penIcon.png
 
-This is a repository of scripts that convert Moby's XML formatted Shakespeare works and [Finals Club](http://finalsclub.org)'s annotations data stored on [AnnotateIt.org](annotateit.org) to work with version 1.2.6 of the [AnnotateIt Plugin](http://annotateit.org/) and use Mongodb/Mongoose to store the data.<br>
+This repo converts two datasets into a format that is compatible with AnnotateIt's jQuery plugin to recreate Open Shakespeare. It takes Moby's XML-formatted complete works of Shakespeare and annotation data from [Finals Club](http://finalsclub.org) stored on [AnnotateIt.org](annotateit.org) and puts them on a MongoDb database and most importantly, allows them to work cohesively with version 1.2.6 of the [AnnotateIt Plugin](http://annotateit.org/).<br>
 
 It can be easily customized and used to migrate this data to another URL or site with a different DOM structure using the Annotator Plugin or even the xpath jQuery library to write your own custom mapping script. 
 
